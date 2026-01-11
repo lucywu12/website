@@ -5,24 +5,56 @@ import ThemeToggle from '@/components/ui/ThemeToggle.astro'
 
 <header>
   <nav>
-    <a href="/">{themeConfig.site.title}</a>
+    <div class="nav-left">
+  <a class="site-title" href="/">{themeConfig.site.title}</a>
+  <a class="nav-link" href="/writing">Writing</a>
+    </div>
     <ThemeToggle />
   </nav>
 </header>
 <style>
+  /* Header layout and separation */
   header {
     margin: 0;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  position: relative;
+  z-index: 1000;
   }
+
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Clickable affordances for header links (no hover shift/underline) */
   header a {
     font-weight: var(--font-weight-bold);
     color: var(--text-primary);
     text-decoration: none;
     min-width: 3rem;
     display: inline-block;
+    cursor: pointer;
+    transition: color 150ms ease;
+  }
+
+  /* Subtle secondary styling for non-title links */
+  .nav-link {
+    font-weight: var(--font-weight-normal);
+    color: var(--text-secondary);
+  }
+
+  /* Keep accessible focus ring for keyboard users, but remove hover/underline animation */
+  header a:focus-visible {
+    outline: 2px solid var(--text-tertiary);
+    outline-offset: 4px;
   }
 </style>
